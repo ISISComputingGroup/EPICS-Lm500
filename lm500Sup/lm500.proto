@@ -1,18 +1,113 @@
-getIDN {
+Terminator = '\r\n';
+ReplyTimeout = 2000;
+
+getIDN{
     out "*IDN?";
     in "%\$1[^\r\n]";
     ExtraInput = Ignore;
 }
 
-cmd {
-    out "\$1";
+getALARM {
+    out "ALARM?";
+    in "%f %*s";
 }
 
-setD {
-    out "\$1 %d";
+getBOOST {
+    out "BOOST?";
+    in "%s";
 }
-getD {
-    out "\$1?";
+
+getOUT {
+    out "OUT?";
     in "%d";
-    ExtraInput = Ignore;
+}
+
+getTYPE {
+    out "TYPE? ";
+    in "%d";
+}
+
+getTYPE1 {
+    out "TYPE? 1";
+    in "%d";
+}
+
+getTYPE2 {
+    out "TYPE? 2";
+    in "%d";
+}
+
+getCHAN {
+    out "CHAN?";
+    in "%d";
+}
+
+getERR{
+    out "ERROR?";
+    in "%d";
+}
+
+getFILL{
+    out "FILL?";
+    in "%d?%c";
+}
+
+getFILL1{
+    out "FILL? 1";
+    in "%d?%c";
+}
+
+getFILL2{
+    out "FILL? 2";
+    in "%d?%c";
+}
+
+getHIGH{
+    out "HIGH?";
+    in "%f %s";
+}
+
+getINERTVAL{
+    out "INTVL?";
+    in "%d,%d,%d";
+}
+
+getLOW{
+    out "LOW?";
+    in "%f %s";
+}
+
+getMEASURE{
+    out "MEAS?";
+    in  "%f %s";
+}
+
+getMEASURE1{
+    out "MEAS? 1";
+    in  "%f %s";
+}
+
+getMEASURE2{
+    out "MEAS? 2";
+    in  "%f %s";
+}
+
+getMODE{
+    out "MODE?";
+    in "%s";
+}
+
+getLENGTH{
+    out "LNGTH?";
+    in "%f %s";
+}
+
+getSTATUS{
+    out "STAT";
+    in "%d,%d,%d";
+}
+
+getUNITS{
+    out "UNITS?";
+    in "%s";
 }
