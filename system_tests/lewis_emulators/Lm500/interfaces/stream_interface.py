@@ -14,7 +14,39 @@ class Lm500StreamInterface(StreamInterface):
         super(Lm500StreamInterface, self).__init__()
         # Commands that we expect via serial during normal operation
         self.commands = {
-            CmdBuilder(self.catch_all).arg("^#9.*$").build()  # Catch-all command for debugging
+            CmdBuilder("get_alarm").escape("ALARM?").eos().build(),
+            CmdBuilder("get_boost").escape("BOOST?").eos().build(),
+            CmdBuilder("get_output").escape("OUT?").eos().build(),
+            CmdBuilder("get_type").escape("TYPE?").eos().build(),
+            CmdBuilder("get_type").escape("TYPE? ").int().eos().build(),
+            CmdBuilder("get_channel").escape("CHAN?").eos().build(),
+            CmdBuilder("get_error").escape("ERROR?").eos().build(),
+            CmdBuilder("get_fill").escape("FILL?").eos().build(),
+            CmdBuilder("get_fill").escape("FILL? ").int().eos().build(),
+            CmdBuilder("get_high").escape("HIGH?").eos().build(),
+            CmdBuilder("get_identity").escape("IDN?").eos().build(),
+            CmdBuilder("get_interval").escape("INTVL?").eos().build(),
+            CmdBuilder("get_low").escape("LOW?").eos().build(),
+            CmdBuilder("get_measurement").escape("MEAS?").eos().build(),
+            CmdBuilder("get_measurement").escape("MEAS? ").int().eos().build(),
+            CmdBuilder("get_mode").escape("MODE?").eos().build(),
+            CmdBuilder("get_length").escape("LNGTH?").eos().build(),
+            CmdBuilder("get_status").escape("STAT?").eos().build(),
+            CmdBuilder("get_units").escape("UNITS?").eos().build(),
+
+            CmdBuilder("set_boost").escape("BOOST ").string().eos().build(),
+            CmdBuilder("set_output").escape("OUT ").int().eos().build(),
+            CmdBuilder("set_channel").escape("CHAN ").int().eos().build(),
+            CmdBuilder("set_error").escape("ERROR ").int().eos().build(),
+            CmdBuilder("set_fill").escape("FILL ").int().eos().build(),
+            CmdBuilder("set_fill").escape("FILL").eos().build(),
+            CmdBuilder("set_high").escape("HIGH ").float().eos().build(),
+            CmdBuilder("set_interval").escape("INTVL ").int().escape(":").int().escape(":").int().eos().build(),
+            CmdBuilder("set_interval").escape("INTVL").eos().build(),
+            CmdBuilder("set_low").escape("LOW ").float().eos().build(),
+            CmdBuilder("set_measurement").escape("MEAS ").int().eos().build(),
+            CmdBuilder("set_mode").escape("MODE ").char().eos().build(),
+            CmdBuilder("set_units").escape("UNITS").string().eos().build()
         }
 
     def handle_error(self, request, error):
@@ -28,5 +60,89 @@ class Lm500StreamInterface(StreamInterface):
         """
         self.log.error("An error occurred at request " + repr(request) + ": " + repr(error))
 
-    def catch_all(self, command):
-        pass
+    def get_alarm(self):
+        return self.device.alarm_threshold
+
+    def get_boost(self):
+        return self.device.boost_mode
+
+    def get_output(self):
+        return self.device.analog_out
+
+    def get_type(self, channel):
+        if channel is None:
+            channel = self.device.channel
+        return self.device.channel_type[channel]
+
+    def get_channel(self):
+        return self.device.channel
+
+    def get_error(self):
+        return self.device.error_response_mode
+
+    def get_fill(self, channel):
+        if channel is None:
+            channel = self.device.channel
+        return self.device.fill_status(channel)
+
+    def get_high(self):
+        return self.device.high_threshold
+
+    def get_low(self):
+        return self.device.low_threshold
+
+    def get_interval(self):
+        return self.device.sample_interval
+
+    def get_length(self):
+        return self.device.sensor_length
+
+    def get_measurement(self, channel):
+        if channel is None:
+            channel = self.device.channel
+        return self.device.measurement[channel]
+
+    def get_mode(self):
+        return self.device.sample_mode
+
+    def get_stat(self):
+        return self.device.status
+
+    def get_units(self):
+        return self.device.units
+
+    def set_boost(self, boost):
+        self.device.boost = boost
+    
+    def set_output(self, output):
+        self.device.analog_out = output
+        
+    def set_channel(self, channel):
+        self.device.channel = channel
+        
+    def set_error(self, set_error):
+        self.device.error_response_mode = set_error
+    
+    def set_fill(self, channel):
+        if channel is None:
+            channel = self.device.channel
+        self.device.fill(channel)
+        
+    def set_high(self, high):
+        self.device.high_threshold = high
+        
+    def set_interval(self, interval):
+        self.device.interval = interval
+        
+    def set_low(self, low):
+        self.device.low_threshold = low
+        
+    def set_measurement(self):
+        self.device.measure()
+        
+    def set_mode(self, set_mode):
+        self.device.set_mode = set_mode
+        
+    def set_units(self, units):
+        if units in ["cm", "in", "%"]:
+            self.device.units = units
