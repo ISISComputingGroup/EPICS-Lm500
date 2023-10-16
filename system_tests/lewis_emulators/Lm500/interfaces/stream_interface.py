@@ -42,7 +42,6 @@ class Lm500StreamInterface(StreamInterface):
             CmdBuilder("set_fill").escape("FILL").eos().build(),
             CmdBuilder("set_high").escape("HIGH ").float().eos().build(),
             CmdBuilder("set_interval").escape("INTVL ").int().escape(":").int().escape(":").int().eos().build(),
-            CmdBuilder("set_interval").escape("INTVL").eos().build(),
             CmdBuilder("set_low").escape("LOW ").float().eos().build(),
             CmdBuilder("set_measurement").escape("MEAS ").int().eos().build(),
             CmdBuilder("set_mode").escape("MODE ").char().eos().build(),
@@ -69,7 +68,7 @@ class Lm500StreamInterface(StreamInterface):
     def get_output(self):
         return self.device.analog_out
 
-    def get_type(self, channel):
+    def get_type(self, channel=None):
         if channel is None:
             channel = self.device.channel
         return self.device.channel_type[channel]
@@ -80,7 +79,7 @@ class Lm500StreamInterface(StreamInterface):
     def get_error(self):
         return self.device.error_response_mode
 
-    def get_fill(self, channel):
+    def get_fill(self, channel=None):
         if channel is None:
             channel = self.device.channel
         return self.device.fill_status(channel)
@@ -94,10 +93,13 @@ class Lm500StreamInterface(StreamInterface):
     def get_interval(self):
         return self.device.sample_interval
 
+    def get_identity(self):
+        return self.device.identity
+
     def get_length(self):
         return self.device.sensor_length
 
-    def get_measurement(self, channel):
+    def get_measurement(self, channel=None):
         if channel is None:
             channel = self.device.channel
         return self.device.measurement[channel]
@@ -105,7 +107,7 @@ class Lm500StreamInterface(StreamInterface):
     def get_mode(self):
         return self.device.sample_mode
 
-    def get_stat(self):
+    def get_status(self):
         return self.device.status
 
     def get_units(self):
@@ -117,13 +119,13 @@ class Lm500StreamInterface(StreamInterface):
     def set_output(self, output):
         self.device.analog_out = output
         
-    def set_channel(self, channel):
+    def set_channel(self, channel=None):
         self.device.channel = channel
         
     def set_error(self, set_error):
         self.device.error_response_mode = set_error
     
-    def set_fill(self, channel):
+    def set_fill(self, channel=None):
         if channel is None:
             channel = self.device.channel
         self.device.fill(channel)
@@ -131,14 +133,16 @@ class Lm500StreamInterface(StreamInterface):
     def set_high(self, high):
         self.device.high_threshold = high
         
-    def set_interval(self, interval):
-        self.device.interval = interval
+    def set_interval(self, hour, minute, second):
+        self.device.interval = f"{hour}:{minute}:{second}"
         
     def set_low(self, low):
         self.device.low_threshold = low
         
-    def set_measurement(self):
-        self.device.measure()
+    def set_measurement(self, channel=None):
+        if channel is None:
+            channel = self.device.channel
+        self.device.measurement[channel] = not self.device.measurement[channel]
         
     def set_mode(self, set_mode):
         self.device.set_mode = set_mode
