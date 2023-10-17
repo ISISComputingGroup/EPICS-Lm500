@@ -1,3 +1,267 @@
+record(ai, "$(P)ALARM:RB") {
+    field(DESC, "Alarm Threshold")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getALARM() $(PORT)")
+}
+
+record(stringin, "BOOST:RB") {
+    field(DESC, "Boost mode")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getBOOST() $(PORT)")
+}
+
+record(ai, "$(P)OUTPUT:RB") {
+    field(DESC, "Output Channel")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getOUT() $(PORT)")
+}
+record(ai, "$(P)TYPE:RB") {
+    field(DESC, "Default Channel's Type")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getTYPE() $(PORT)")
+}
+
+record(ai, "$(P)TYPE:CHAN1:RB") {
+    field(DESC, "Channel 1's Type")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getTYPECHAN(1) $(PORT)")
+}
+
+record(ai, "$(P)TYPE:CHAN2:RB") {
+    field(DESC, "Channel 2's Type")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getTYPECHAN(2) $(PORT)")
+}
+record(ai, "$(P)CHANNEL:RB") {
+    field(DESC, "Default Channel")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getCHAN() $(PORT)")
+}
+
+record(ai, "$(P)ERROR:RB") {
+    field(DESC, "Error Mode")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getERR() $(PORT)")
+}
+
+record(ai, "$(P)FILL:TIME") {
+    field(DESC, "default channel result from querying Fill")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getFILL($(P)FILL:STATUS) $(PORT)")
+}
+record(stringin, "$(P)FILL:STATUS") {
+    field(DESC, "default channel result from querying Fill")
+    field(DTYP, "Soft Channel")
+}
+record(ai, "$(P)FILL:CHAN1:TIME") {
+    field(DESC, "Channel 1 result from querying Fill")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getFILLCHAN(1, $(P)FILL:CHAN1:STATUS) $(PORT)")
+}
+record(stringin, "$(P)FILL:CHAN1:STATUS") {
+    field(DESC, "channel 2 result from querying Fill")
+    field(DTYP, "Soft Channel")
+}
+record(ai, "$(P)FILL:CHAN2:TIME") {
+    field(DESC, "Channel 2 result from querying Fill")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getFILLCHAN(2, $(P)FILL:CHAN2:STATUS) $(PORT)")
+}
+record(stringin, "$(P)FILL:CHAN2:STATUS") {
+    field(DESC, "channel 1 result from querying Fill")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(P)HIGH:RB") {
+    field(DESC, "High Threshold")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getHIGH() $(PORT)")
+}
+
+record(ai, "$(P)LOW:RB") {
+    field(DESC, "Low Threshold")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getLOW() $(PORT)")
+}
+
+record(ai, "$(P)INTRVL:RB") {
+    field(DESC, "Interval")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getINERTVAL() $(PORT)")
+}
+
+record(ai, "$(P)MEAS:RB") {
+    field(DESC, "Default Channel's Measurement")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getMEASURE() $(PORT)")
+}
+
+record(ai, "$(P)MEAS:CHAN1:RB") {
+    field(DESC, "Channel 1's Measurement")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getMEASURECHAN(1) $(PORT)")
+}
+
+record(ai, "$(P)MEAS:CHAN2:RB") {
+    field(DESC, "Channel 2's Measurement")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getMEASURECHAN(2) $(PORT)")
+}
+
+record(stringin, "MODE:RB") {
+    field(DESC, "Mode")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getMODE() $(PORT)")
+}
+
+record(ai, "$(P)LENGTH:RB") {
+    field(DESC, "Sensor Length")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getLENGTH() $(PORT)")
+}
+
+record(mbbiDirect, "$(P)STATUS:BIT:0") {
+    field(DESC, "Channel 1 detailed status")
+    field(DTYP, "stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getSTATUS($(P)STATUS:BIT:1, $(P)STATUS:BIT:2) $(PORT)")
+    # 0 Read in progress
+    # 1 Refill active
+    # 2 Refill timeout occurred
+    # 3 Auto refil is inihibeted by low = 0.0 or timeout
+    # 4 Alarm limit is exceeded
+    # 5 Open sensor was detected (LHe channel only)
+    # 6 Burnout codition was detected
+}
+
+
+record(mbbiDirect, "$(P)STATUS:BIT:1") {
+    field(DESC, "Channel 2 detailed status")
+    field(DTYP, "Soft Channel")
+    # 0 Read in progress
+    # 1 Refill active
+    # 2 Refill timeout occurred
+    # 3 Auto refil is inihibeted by low = 0.0 or timeout
+    # 4 Alarm limit is exceeded
+    # 5 Open sensor was detected (LHe channel only)
+    # 6 Burnout codition was detected
+}
+
+record(bi, "$(P)CHAN1:READ") {
+    field(DESC, "Channel 1 Read Status")
+    field(ONAM, "Read in progress")
+    field(INP,  "$(P)STATUS:BIT:0.B0")
+}
+
+record(bi, "$(P)CHAN2:READ") {
+    field(DESC, "Channel 2 Read Status")
+    field(ONAM, "Read in progress")
+    field(INP,  "$(P)STATUS:BIT:1.B0")
+}
+
+record(bi, "$(P)CHAN1:REFILL") {
+    field(DESC, "Channel 1 Refill Status")
+    field(ONAM, "Refill active")
+    field(INP,  "$(P)STATUS:BIT:0.B1")
+}
+
+record(bi, "$(P)CHAN2:REFILL") {
+    field(DESC, "Channel 2 Refill Status")
+    field(ONAM, "Refill active")
+    field(INP,  "$(P)STATUS:BIT:1.B1")
+}
+
+record(bi, "$(P)CHAN1:REFILL:TIMEOUT") {
+    field(DESC, "Channel 1 Refill Timeout")
+    field(ONAM, "Refill timeout occured")
+    field(INP,  "$(P)STATUS:BIT:0.B2")
+}
+
+record(bi, "$(P)CHAN2:REFILL:TIMEOUT") {
+    field(DESC, "Channel 2 Refill Timeout")
+    field(ONAM, "Refill timeout occured")
+    field(INP,  "$(P)STATUS:BIT:1.B2")
+}
+
+record(bi, "$(P)CHAN1:REFILL:INHIBITED") {
+    field(DESC, "Channel 1 Refill Inhibited")
+    field(ONAM, "Auto refil is inihibeted by low = 0.0 or timeout")
+    field(INP,  "$(P)STATUS:BIT:0.B3")
+}
+
+record(bi, "$(P)CHAN2:REFILL:INHIBITED") {
+    field(DESC, "Channel 2 Refill Inhibited")
+    field(ONAM, "Auto refil is inihibeted by low = 0.0 or timeout")
+    field(INP,  "$(P)STATUS:BIT:1.B3")
+}
+
+record(bi, "$(P)CHAN1:ALARM:STATUS") {
+    field(DESC, "Channel 1 Alarm Status")
+    field(ONAM, "Alarm Limit Exceeded")
+    field(INP,  "$(P)STATUS:BIT:0.B4")
+}
+
+record(bi, "$(P)CHAN2:ALARM:STATUS") {
+    field(DESC, "Channel 2 Alarm Status")
+    field(ONAM, "Alarm Limit Exceeded")
+    field(INP,  "$(P)STATUS:BIT:1.B4")
+}
+
+record(bi, "$(P)CHAN1:SENSOR:STATUS") {
+    field(DESC, "Channel 1 Sensor Status")
+    field(ONAM, "Open Sensor")
+    field(INP,  "$(P)STATUS:BIT:0.B5")
+}
+
+record(bi, "$(P)CHAN2:SENSOR:STATUS") {
+    field(DESC, "Channel 2 Sensor Status")
+    field(ONAM, "Open Sensor")
+    field(INP,  "$(P)STATUS:BIT:1.B5")
+}
+
+record(bi, "$(P)CHAN1:BURNOUT") {
+    field(DESC, "Channel 1 Burnout Status")
+    field(ONAM, "Burnout condition detected")
+    field(INP,  "$(P)STATUS:BIT:0.B6")
+}
+
+record(bi, "$(P)CHAN2:BURNOUT") {
+    field(DESC, "Channel 2 Burnout Status")
+    field(ONAM, "Burnout condition detected")
+    field(INP,  "$(P)STATUS:BIT:1.B6")
+}
+
+record(ai, "$(P)MENU:MODE") {
+    field(DESC, "Menu Mode")
+    field(DTYP, "Soft Channel")
+}
+
+record(record(stringin, "$(P)UNITS") {
+    field(DESC, "Units")
+    field(DTYP, "Soft Channel stream")
+    field(SCAN, "1 second")
+    field(INP,  "@lm500.proto getUNITS()")
+})
+
 record(bo, "$(P)SIM")
 {
     field(SCAN, "Passive")
