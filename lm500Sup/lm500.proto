@@ -23,17 +23,12 @@ getOUT {
 }
 
 getTYPE {
-    out "TYPE? ";
+    out "TYPE?";
     in "%d";
 }
 
-getTYPE1 {
-    out "TYPE? 1";
-    in "%d";
-}
-
-getTYPE2 {
-    out "TYPE? 2";
+getTYPECHAN {
+    out "TYPE? \$1";
     in "%d";
 }
 
@@ -49,47 +44,39 @@ getERR{
 
 getFILL{
     out "FILL?";
-    in "%d?%c";
+    in "%d %(EGU)s";
+    @mismatch {in "%(\$1)s";}
 }
 
-getFILL1{
-    out "FILL? 1";
-    in "%d?%c";
-}
-
-getFILL2{
-    out "FILL? 2";
-    in "%d?%c";
+getFILLCHAN{
+    out "FILL? \$1";
+    in "%d %(EGU)s";
+    @mismatch {in "%(\$2)s";}
 }
 
 getHIGH{
     out "HIGH?";
-    in "%f %s";
+    in "%f %(EGU)s";
 }
 
 getINERTVAL{
     out "INTVL?";
-    in "%d,%d,%d";
+    in "%d:%d:%d";
 }
 
 getLOW{
     out "LOW?";
-    in "%f %s";
+    in "%f %(EGU)s";
 }
 
 getMEASURE{
     out "MEAS?";
-    in  "%f %s";
+    in  "%f %(EGU)s";
 }
 
-getMEASURE1{
-    out "MEAS? 1";
-    in  "%f %s";
-}
-
-getMEASURE2{
-    out "MEAS? 2";
-    in  "%f %s";
+getMEASURECHAN{
+    out "MEAS? \$1";
+    in  "%f %(EGU)s";
 }
 
 getMODE{
@@ -99,12 +86,12 @@ getMODE{
 
 getLENGTH{
     out "LNGTH?";
-    in "%f %s";
+    in "%f %(EGU)s";
 }
 
 getSTATUS{
-    out "STAT";
-    in "%d,%d,%d";
+    out "STAT?";
+    in "%d,%(\$1)d,%(\$2)d";
 }
 
 getUNITS{
