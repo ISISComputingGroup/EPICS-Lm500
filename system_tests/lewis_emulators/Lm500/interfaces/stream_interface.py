@@ -71,7 +71,7 @@ class Lm500StreamInterface(StreamInterface):
     def get_type(self, channel=None):
         if channel is None:
             channel = self.device.channel
-        return self.device.channel_type[channel]
+        return self.device.type[channel]
 
     def get_channel(self):
         return self.device.channel
