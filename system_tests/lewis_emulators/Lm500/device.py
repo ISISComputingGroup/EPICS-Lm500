@@ -6,17 +6,17 @@ from lewis.devices import StateMachineDevice
 class SimulatedLm500(StateMachineDevice):
 
     def _initialize_data(self):
-        self.alarm_threshold = "10 cm"
+        self.alarm_threshold = "10"
         self.boost_mode = "OFF"
         self.analog_out = 0
         self.type = {1: 4, 2: 27}
         self.channel = 1
         self.error_response_mode = 0
-        self.high_threshold = "0 cm"
-        self.low_threshold = "0 cm"
-        self.sample_interval = "0:0:0"
-        self.sensor_length = "0 cm"
-        self.measurement = {1: "0 cm", 2: "0 cm"}
+        self.high_threshold = "0"
+        self.low_threshold = "0"
+        self.sample_interval = "00:00:00"
+        self.sensor_length = "0"
+        self.measurement = {1: "0", 2: "0"}
         self.sample_mode = "Sample/Hold"
         self.units = "cm"
         self.status = "0,0,0"
@@ -42,3 +42,22 @@ class SimulatedLm500(StateMachineDevice):
             return "2 min"
         else:
             return "Off"
+
+    def get_alarm_threshold(self):
+        return f"{self.alarm_threshold} {self.units}"
+
+    def get_high_threshold(self):
+        return f"{self.high_threshold} {self.units}"
+
+    def get_low_threshold(self):
+        return f"{self.low_threshold} {self.units}"
+
+    def get_sensor_length(self):
+        return f"{self.sensor_length} {self.units}"
+
+    def get_measurement(self, channel):
+        return f"{self.measurement[channel]} {self.units}"
+
+    def set_measurement(self, channel):
+        self.measurement[channel] = "25"
+

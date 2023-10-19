@@ -45,7 +45,7 @@ class Lm500StreamInterface(StreamInterface):
             CmdBuilder("set_low").escape("LOW ").float().eos().build(),
             CmdBuilder("set_measurement").escape("MEAS ").int().eos().build(),
             CmdBuilder("set_mode").escape("MODE ").char().eos().build(),
-            CmdBuilder("set_units").escape("UNITS").string().eos().build()
+            CmdBuilder("set_units").escape("UNITS ").string().eos().build()
         }
 
     def handle_error(self, request, error):
@@ -60,7 +60,7 @@ class Lm500StreamInterface(StreamInterface):
         self.log.error("An error occurred at request " + repr(request) + ": " + repr(error))
 
     def get_alarm(self):
-        return self.device.alarm_threshold
+        return self.device.get_alarm_threshold()
 
     def get_boost(self):
         return self.device.boost_mode
@@ -85,10 +85,10 @@ class Lm500StreamInterface(StreamInterface):
         return self.device.fill_status(channel)
 
     def get_high(self):
-        return self.device.high_threshold
+        return self.device.get_high_threshold()
 
     def get_low(self):
-        return self.device.low_threshold
+        return self.device.get_low_threshold()
 
     def get_interval(self):
         return self.device.sample_interval
@@ -97,7 +97,7 @@ class Lm500StreamInterface(StreamInterface):
         return self.device.identity
 
     def get_length(self):
-        return self.device.sensor_length
+        return self.device.get_sensor_length()
 
     def get_measurement(self, channel=None):
         if channel is None:
@@ -114,7 +114,7 @@ class Lm500StreamInterface(StreamInterface):
         return self.device.units
 
     def set_boost(self, boost):
-        self.device.boost = boost
+        self.device.boost_mode = boost
     
     def set_output(self, output):
         self.device.analog_out = output
@@ -142,7 +142,7 @@ class Lm500StreamInterface(StreamInterface):
     def set_measurement(self, channel=None):
         if channel is None:
             channel = self.device.channel
-        self.device.measurement[channel] = not self.device.measurement[channel]
+        self.device.set_measurement(channel)
         
     def set_mode(self, set_mode):
         self.device.set_mode = set_mode
