@@ -61,7 +61,7 @@ getHIGH{
 
 getINERTVAL{
     out "INTVL?";
-    in "%d:%d:%d";
+    in "%/[0-9]{2}:[0-9]{2}:[0-9]{2}/";
 }
 
 getLOW{
@@ -97,4 +97,52 @@ getSTATUS{
 getUNITS{
     out "UNITS?";
     in "%s";
+}
+
+setBOOST{
+    out "BOOST %s";
+}
+
+setOUT{
+    out "OUT %d";
+}
+
+setCHAN{
+    out "CHAN %d";
+}
+
+setERR{
+    out "ERROR %d";
+}
+
+fillCHAN{
+    out "FILL %d";
+}
+
+fill{
+    out "FILL";
+}
+
+setHIGH{
+    out "HIGH %f";
+}
+
+setLOW{
+    out "LOW %f";
+}
+
+setINTVL{
+    out "INTVL %s";
+}
+
+setMEAS{
+    out "MEAS %d";
+}
+
+setMODE{
+    out "MODE %s";
+}
+
+setUNITS{
+    out "UNITS %s";
 }
