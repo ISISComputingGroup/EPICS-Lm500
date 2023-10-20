@@ -135,8 +135,11 @@ setINTVL{
     out "INTVL %s";
 }
 
-setMEAS{
-    out "MEAS %d";
+MEAS{
+    out "MEAS";
+}
+MEASCHAN{
+    out "MEAS \$1";
 }
 
 setMODE{

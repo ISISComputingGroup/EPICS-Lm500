@@ -44,6 +44,7 @@ class Lm500StreamInterface(StreamInterface):
             CmdBuilder("set_interval").escape("INTVL ").int().escape(":").int().escape(":").int().eos().build(),
             CmdBuilder("set_low").escape("LOW ").float().eos().build(),
             CmdBuilder("set_measurement").escape("MEAS ").int().eos().build(),
+            CmdBuilder("set_measurement").escape("MEAS").eos().build(),
             CmdBuilder("set_mode").escape("MODE ").char().eos().build(),
             CmdBuilder("set_units").escape("UNITS ").string().eos().build()
         }

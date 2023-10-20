@@ -236,6 +236,15 @@ record(stringout, "$(P)INTRVL:SP") {
     field(OUT, "@lm500.proto setINTVL $(PORT)")
 }
 
+record(bo, "$(P)MEAS") {
+    field(DESC, "Start Measurement")
+    field(DTYP, "stream")
+    field(VAL,  "0")
+    field(ONAM, "Start Measurement") 
+    field(HIGH, "1")
+    field(OUT,  "@lm500.proto MEAS $(PORT)")
+}
+
 record(ai, "$(P)MEAS:RB") {
     field(DESC, "Default Channel's Measurement")
     field(DTYP, "stream")
@@ -243,11 +252,29 @@ record(ai, "$(P)MEAS:RB") {
     field(INP,  "@lm500.proto getMEASURE() $(PORT)")
 }
 
+record(bo, "$(P)MEAS:CHAN1") {
+    field(DESC, "Start Measurement in Channel 1")
+    field(DTYP, "stream")
+    field(VAL,  "0")
+    field(ONAM, "Start Measurement") 
+    field(HIGH, "1")
+    field(OUT,  "@lm500.proto MEASCHAN(1) $(PORT)")
+}
+
 record(ai, "$(P)MEAS:CHAN1:RB") {
     field(DESC, "Channel 1's Measurement")
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getMEASURECHAN(1) $(PORT)")
+}
+
+record(bo, "$(P)MEAS:CHAN2") {
+    field(DESC, "Start Measurement in Channel 2")
+    field(DTYP, "stream")
+    field(VAL,  "0")
+    field(ONAM, "Start Measurement") 
+    field(HIGH, "1")
+    field(OUT,  "@lm500.proto MEASCHAN(2) $(PORT)")
 }
 
 record(ai, "$(P)MEAS:CHAN2:RB") {
