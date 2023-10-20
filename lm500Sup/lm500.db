@@ -122,6 +122,15 @@ record(mbbo, "$(P)ERROR:SP") {
     field(OUT, "@lm500.proto setERR $(PORT)")
 }
 
+record(bo, "$(P)FILL") {
+    field(DESC, "Start Fil")
+    field(DTYP, "stream")
+    field(VAL,  "0")
+    field(ONAM, "Starting Fill") 
+    field(HIGH, "1")
+    field(OUT,  "@lm500.proto FILL $(PORT)")
+}
+
 record(ai, "$(P)FILL:TIME") {
     field(DESC, "default channel Fill time")
     field(DTYP, "stream")
@@ -136,6 +145,15 @@ record(mbbi, "$(P)FILL:STATUS") {
     field(ZRST, "Off")
     field(ONST, "Timeout")
     field(DTYP, "Soft Channel")
+}
+
+record(bo, "$(P)FILL:CHAN1") {
+    field(DESC, "Start Fil")
+    field(DTYP, "stream")
+    field(VAL,  "0")
+    field(ONAM, "Starting Fill") 
+    field(HIGH, "1")
+    field(OUT,  "@lm500.proto FILLCHAN(1) $(PORT)")
 }
 
 record(ai, "$(P)FILL:CHAN1:TIME") {
@@ -153,6 +171,16 @@ record(mbbi, "$(P)FILL:CHAN1:STATUS") {
     field(ONST, "Timeout")
     field(DTYP, "Soft Channel")
 }
+
+record(bo, "$(P)FILL:CHAN2") {
+    field(DESC, "Start Fil")
+    field(DTYP, "stream")
+    field(VAL,  "0")
+    field(ONAM, "Starting Fill") 
+    field(HIGH, "1")
+    field(OUT,  "@lm500.proto FILLCHAN(2) $(PORT)")
+}
+
 record(ai, "$(P)FILL:CHAN2:TIME") {
     field(DESC, "Channel 2 result Fill time")
     field(DTYP, "stream")

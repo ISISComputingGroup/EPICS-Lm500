@@ -116,7 +116,7 @@ setERR{
 }
 
 fillCHAN{
-    out "FILL %d";
+    out "FILL \$1";
 }
 
 fill{
