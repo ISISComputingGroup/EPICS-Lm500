@@ -102,7 +102,7 @@ class Lm500StreamInterface(StreamInterface):
     def get_measurement(self, channel=None):
         if channel is None:
             channel = self.device.channel
-        return self.device.measurement[channel]
+        return self.device.get_measurement(channel)
 
     def get_mode(self):
         return self.device.sample_mode
@@ -144,9 +144,14 @@ class Lm500StreamInterface(StreamInterface):
             channel = self.device.channel
         self.device.set_measurement(channel)
         
-    def set_mode(self, set_mode):
-        self.device.set_mode = set_mode
+    def set_mode(self, mode):
+        modes = {"0": "Disabled", "S": "Sample/Hold", "C": "Continuous"}
+        self.device.set_mode = modes[mode]
         
     def set_units(self, units):
-        if units in ["cm", "in", "%"]:
+        if units in ["CM", "IN", "%"]:
             self.device.units = units
+        else:
+            if units == "PERCENT":
+                self.device.units = "%"
+
