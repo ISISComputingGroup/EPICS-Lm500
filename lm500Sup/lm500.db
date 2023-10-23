@@ -230,10 +230,35 @@ record(stringin, "$(P)INTRVL:RB") {
     field(INP,  "@lm500.proto getINERTVAL() $(PORT)")
 }
 
-record(stringout, "$(P)INTRVL:SP") {
-    field(DESC, "Set Interval")
+record(scalcout, "$(P)INTRVL:SP") {
+    field(DESC, "Interval Setpoint")
     field(DTYP, "stream")
+    field(CALC, "$P('%02i',a)+':'+$P('%02i',b)+':'+$P('%02i',c)")
+    field(INPA, "$(P)INTRVL:HOUR:SP CP MS")
+    field(INPB, "$(P)INTRVL:MIN:SP CP MS")
+    field(INPC,  "$(P)INTRVL:SEC:SP CP MS")
     field(OUT, "@lm500.proto setINTVL $(PORT)")
+}
+
+record(ao, "$(P)INTRVL:HOUR:SP") {
+    field(DESC, "Set Interval Hour")
+    field(DTYP, "Soft Channel")
+    field(DRVH, "99")
+    field(DRVL, "0")
+}
+
+record(ao, "$(P)INTRVL:MIN:SP") {
+    field(DESC, "Set Interval Minute")
+    field(DTYP, "Soft Channel")
+    field(DRVH, "60")
+    field(DRVL, "0")
+}
+
+record(ao, "$(P)INTRVL:SEC:SP") {
+    field(DESC, "Set Interval Second")
+    field(DTYP, "Soft Channel")
+    field(DRVH, "60")
+    field(DRVL, "0")
 }
 
 record(bo, "$(P)MEAS") {

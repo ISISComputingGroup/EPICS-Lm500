@@ -135,7 +135,7 @@ class Lm500StreamInterface(StreamInterface):
         self.device.high_threshold = high
         
     def set_interval(self, hour, minute, second):
-        self.device.interval = f"{hour}:{minute}:{second}"
+        self.device.sample_interval = f"{hour:02}:{minute:02}:{second:02}"
         
     def set_low(self, low):
         self.device.low_threshold = low
