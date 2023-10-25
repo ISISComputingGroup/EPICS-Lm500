@@ -9,7 +9,7 @@ getIDN{
 
 getALARM {
     out "ALARM?";
-    in "%f %*s";
+    in "%f %(EGU)s";
 }
 
 getBOOST {
