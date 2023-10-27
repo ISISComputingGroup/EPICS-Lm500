@@ -6,9 +6,7 @@ from utils.test_modes import TestModes
 from utils.testing import get_running_lewis_and_ioc, skip_if_recsim
 from parameterized import parameterized
 
-
 DEVICE_PREFIX = "LM500_01"
-
 
 IOCS = [
     {
@@ -19,7 +17,6 @@ IOCS = [
     },
 ]
 
-
 TEST_MODES = [TestModes.RECSIM, TestModes.DEVSIM]
 
 
@@ -27,6 +24,7 @@ class Lm500Tests(unittest.TestCase):
     """
     Tests for the Lm500 IOC.
     """
+
     def setUp(self):
         self._lewis, self._ioc = get_running_lewis_and_ioc("Lm500", DEVICE_PREFIX)
         self.ca = ChannelAccess(device_prefix=DEVICE_PREFIX)
@@ -55,7 +53,7 @@ class Lm500Tests(unittest.TestCase):
     def test_that_WHEN_low_threshold_is_set_THEN_rb_matches(self, _, threshold):
         self.ca.assert_setting_setpoint_sets_readback(threshold, readback_pv="LOW:RB", set_point_pv="LOW:SP")
 
-    @parameterized.expand([("_below_0_test", -10, "00:00:00"),("_zero_test", 0, "00:00:00"),
+    @parameterized.expand([("_below_0_test", -10, "00:00:00"), ("_zero_test", 0, "00:00:00"),
                            ("_thirty_test", 30, "30:00:00"), ("_above_60_test", 70, "70:00:00"),
                            ("_above_99_test", 200, "99:00:00")])
     def test_that_WHEN_hour_intrvl_setpoint_set_THEN_correct_time_set_and_readback(self, _, hour, time):
@@ -82,7 +80,7 @@ class Lm500Tests(unittest.TestCase):
         self.ca.assert_that_pv_is("INTRVL:SP.SVAL", time)
         self.ca.assert_that_pv_is("INTRVL:RB", time)
 
-    @parameterized.expand([("_just_hour", 10, 0, 0,  "10:00:00"), ("_just_minute", 0, 10, 0, "00:10:00"),
+    @parameterized.expand([("_just_hour", 10, 0, 0, "10:00:00"), ("_just_minute", 0, 10, 0, "00:10:00"),
                            ("_just_second", 0, 0, 10, "00:00:10"), ("_hour_and_minute", 10, 20, 0, "10:20:00"),
                            ("_hour_and_second", 10, 0, 20, "10:00:20"), ("_minute_and_second", 0, 10, 20, "00:10:20"),
                            ("_all", 10, 20, 30, "10:20:30")])
@@ -95,7 +93,7 @@ class Lm500Tests(unittest.TestCase):
         self.ca.assert_that_pv_is("INTRVL:RB", time)
 
     @parameterized.expand([("Disabled", "0"), ("Sample/Hold", "S"), ("Continuous", "C")])
-    def test_that_WHEN_mode_is_set_THEN_rb_matches(self, mode_set, mode):
+    def test_that_WHEN_mode_is_set_THEN_rb_matches(self, mode, mode_set):
         self.ca.assert_setting_setpoint_sets_readback(mode_set, readback_pv="MODE:RB", set_point_pv="MODE:SP",
                                                       expected_value=mode)
 
@@ -124,12 +122,39 @@ class Lm500Tests(unittest.TestCase):
         self.ca.assert_that_pv_is("LENGTH:RB.EGU", units)
         self.ca.assert_that_pv_is("ALARM:RB.EGU", units)
 
+    @skip_if_recsim("Uses emulator backdoor")
+    @parameterized.expand([("_all_0", "00000000", "00000000", 0, [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0,  0]),
+                           ("_all_1", "01111111", "01111111", 1, [1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1]),
+                           ("_chan_1_all_1", "01111111", "00000000", 0, [1, 1, 1, 1, 1, 1, 1],
+                            [0, 0, 0, 0, 0, 0, 0]),
+                           ("_chan_2_all_1", "00000000", "01111111", 0, [0, 0, 0, 0, 0, 0, 0],
+                            [1, 1, 1, 1, 1, 1, 1]),
+                           ("burnout_detected", "01000000", "00000000", 0, [1, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0]),
+                           ("open_sensor", "00100000", "00000000", 0, [0, 1, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0]),
+                           ("alarm_limit", "00010000", "00000000", 0, [0, 0, 1, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0]),
+                           ("auto_refill", "00001000", "00000000", 0, [0, 0, 0, 1, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0]),
+                           ("refill_timeout", "00000100", "00000000", 0, [0, 0, 0, 0, 1, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0]),
+                           ("refill_active", "00000010", "00000000", 0, [0, 0, 0, 0, 0, 1, 0],
+                            [0, 0, 0, 0, 0, 0, 0]),
+                           ("read_in_progress", "00000001", "00000000", 0, [0, 0, 0, 0, 0, 0, 1],
+                            [0, 0, 0, 0, 0, 0, 0])])
+    def test_that_WHEN_status_bits_set_THEN_correctly_seperated(self, _, int1, int2, int3, first_bits, second_bits):
+        self._lewis.backdoor_set_on_device("status", f"{int(int1, 2)},{int(int2, 2)},{int3}")
+        self.ca.assert_that_pv_is_number("STATUS:BIT:0", int(int1, 2))
+        self.ca.assert_that_pv_is_number("STATUS:BIT:1", int(int2, 2))
+        self.ca.assert_that_pv_is_number("MENU:MODE", int3)
+        pvs = ["BURNOUT", "SENSOR:STATUS", "ALARM:STATUS", "REFILL:INHIBITED", "REFILL:TIMEOUT", "REFILL", "READ"]
+        pv = 0
+        for bit in first_bits:
+            self.ca.assert_that_pv_is_number(f"CHAN1:{pvs[pv]}.RVAL", bit)
+            pv = pv + 1
 
-
-
-
-
-
-
-
-
+        pv = 0
+        for bit in second_bits:
+            self.ca.assert_that_pv_is_number(f"CHAN2:{pvs[pv]}.RVAL", bit)
+            pv = pv + 1

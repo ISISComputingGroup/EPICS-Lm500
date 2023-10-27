@@ -2,7 +2,6 @@ from collections import OrderedDict
 from .states import DefaultState
 from lewis.devices import StateMachineDevice
 
-
 class SimulatedLm500(StateMachineDevice):
 
     def _initialize_data(self):
@@ -60,4 +59,3 @@ class SimulatedLm500(StateMachineDevice):
 
     def set_measurement(self, channel):
         self.measurement[channel] = "25"
-

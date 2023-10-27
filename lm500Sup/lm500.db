@@ -309,7 +309,7 @@ record(ai, "$(P)MEAS:CHAN2:RB") {
     field(INP,  "@lm500.proto getMEASURECHAN(2) $(PORT)")
 }
 
-record(mbbi, "MODE:RB") {
+record(mbbi, "$(P)MODE:RB") {
     field(DESC, "Mode")
     field(DTYP, "stream")
     field(ZRST, "Disabled")

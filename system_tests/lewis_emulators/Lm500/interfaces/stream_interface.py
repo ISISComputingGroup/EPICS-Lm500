@@ -147,7 +147,7 @@ class Lm500StreamInterface(StreamInterface):
         
     def set_mode(self, mode):
         modes = {"0": "Disabled", "S": "Sample/Hold", "C": "Continuous"}
-        self.device.set_mode = modes[mode]
+        self.device.sample_mode = modes[mode]
         
     def set_units(self, units):
         if units in ["CM", "IN", "%"]:
