@@ -319,13 +319,22 @@ record(mbbi, "$(P)MODE:RB") {
     field(INP,  "@lm500.proto getMODE() $(PORT)")
 }
 
-record(mbbo, "$(P)MODE:SP") {
+record(mbbo, "$(P)MODE:SP:RAW") {
     field(DESC, "Mode Setpoint")
     field(DTYP, "stream")
     field(ZRST, "0")
     field(ONST, "S")
     field(TWST, "C")
-    field(OUT,  "@lm500.proto setMODE $(PORT)")
+    field(OUT,  "@lm500.proto setMODE($(P)MODE:SP) $(PORT)")
+}
+
+record(mbbo, "$(P)MODE:SP") {
+    field(DESC, "Mode Setpoint")
+    field(DTYP, "soft channel")
+    field(ZRST, "Disabled")
+    field(ONST, "Sample/Hold")
+    field(TWST, "Continuous")
+    field(OUT,  "$(P)MODE:SP:RAW PP")
 }
 
 record(ai, "$(P)LENGTH:RB") {
@@ -364,91 +373,107 @@ record(mbbiDirect, "$(P)STATUS:BIT:1") {
 
 record(bi, "$(P)CHAN1:READ") {
     field(DESC, "Channel 1 Read Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Read in progress")
     field(INP,  "$(P)STATUS:BIT:0.B0 CP MS")
 }
 
 record(bi, "$(P)CHAN2:READ") {
     field(DESC, "Channel 2 Read Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Read in progress")
     field(INP,  "$(P)STATUS:BIT:1.B0 CP MS")
 }
 
 record(bi, "$(P)CHAN1:REFILL") {
     field(DESC, "Channel 1 Refill Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Refill active")
     field(INP,  "$(P)STATUS:BIT:0.B1 CP MS")
 }
 
 record(bi, "$(P)CHAN2:REFILL") {
     field(DESC, "Channel 2 Refill Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Refill active")
     field(INP,  "$(P)STATUS:BIT:1.B1 CP MS")
 }
 
 record(bi, "$(P)CHAN1:REFILL:TIMEOUT") {
     field(DESC, "Channel 1 Refill Timeout")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Refill timeout occured")
     field(INP,  "$(P)STATUS:BIT:0.B2 CP MS")
 }
 
 record(bi, "$(P)CHAN2:REFILL:TIMEOUT") {
     field(DESC, "Channel 2 Refill Timeout")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Refill timeout occured")
     field(INP,  "$(P)STATUS:BIT:1.B2 CP MS")
 }
 
 record(bi, "$(P)CHAN1:REFILL:INHIBITED") {
     field(DESC, "Channel 1 Refill Inhibited")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Auto refil is inihibeted")
     field(INP,  "$(P)STATUS:BIT:0.B3 CP MS")
 }
 
 record(bi, "$(P)CHAN2:REFILL:INHIBITED") {
     field(DESC, "Channel 2 Refill Inhibited")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Auto refil is inihibeted")
     field(INP,  "$(P)STATUS:BIT:1.B3 CP MS")
 }
 
 record(bi, "$(P)CHAN1:ALARM:STATUS") {
     field(DESC, "Channel 1 Alarm Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Alarm Limit Exceeded")
     field(INP,  "$(P)STATUS:BIT:0.B4 CP MS")
 }
 
 record(bi, "$(P)CHAN2:ALARM:STATUS") {
     field(DESC, "Channel 2 Alarm Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Alarm Limit Exceeded")
     field(INP,  "$(P)STATUS:BIT:1.B4 CP MS")
 }
 
 record(bi, "$(P)CHAN1:SENSOR:STATUS") {
     field(DESC, "Channel 1 Sensor Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Open Sensor")
     field(INP,  "$(P)STATUS:BIT:0.B5 CP MS")
 }
 
 record(bi, "$(P)CHAN2:SENSOR:STATUS") {
     field(DESC, "Channel 2 Sensor Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Open Sensor")
     field(INP,  "$(P)STATUS:BIT:1.B5 CP MS")
 }
 
 record(bi, "$(P)CHAN1:BURNOUT") {
     field(DESC, "Channel 1 Burnout Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Burnout detected")
     field(INP,  "$(P)STATUS:BIT:0.B6 CP MS")
 }
 
 record(bi, "$(P)CHAN2:BURNOUT") {
     field(DESC, "Channel 2 Burnout Status")
+    field(DTYP, "Raw Soft Channel")
     field(ONAM, "Burnout detected")
     field(INP,  "$(P)STATUS:BIT:1.B6 CP MS")
 }
 
-record(ai, "$(P)MENU:MODE") {
+record(bi, "$(P)MENU:MODE") {
     field(DESC, "Menu Mode")
-    field(DTYP, "Soft Channel")
+    field(DTYP, "stream")
+    field(ONAM, "Menu Mode")
+    field(ZNAM, "Operate Mode")
 }
 
 record(mbbi, "$(P)UNITS:RB") {

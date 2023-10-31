@@ -101,18 +101,22 @@ getUNITS{
 
 setBOOST{
     out "BOOST %s";
+    @init { out "BOOST?"; in "%s";}
 }
 
 setOUT{
     out "OUT %d";
+    @init { out "OUT?"; in "%d";}
 }
 
 setCHAN{
     out "CHAN %d";
+    @init { out "CHAN?"; in "%d";}
 }
 
 setERR{
     out "ERROR %d";
+    @init { out "ERROR?"; in "%d";}
 }
 
 fillCHAN{
@@ -125,10 +129,12 @@ fill{
 
 setHIGH{
     out "HIGH %f";
+    @init { out "HIGH?"; in "%f %(EGU)s";}
 }
 
 setLOW{
     out "LOW %f";
+    @init { out "LOW?"; in "%f %(EGU)s";}
 }
 
 setINTVL{
@@ -144,8 +150,10 @@ MEASCHAN{
 
 setMODE{
     out "MODE %s";
+    @init { out "MODE?"; in "%(\$1)s";}
 }
 
 setUNITS{
     out "UNITS %s";
+    @init { out "UNITS?"; in "%s";}
 }

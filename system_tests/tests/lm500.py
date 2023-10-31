@@ -92,10 +92,9 @@ class Lm500Tests(unittest.TestCase):
         self.ca.assert_that_pv_is("INTRVL:SP.SVAL", time)
         self.ca.assert_that_pv_is("INTRVL:RB", time)
 
-    @parameterized.expand([("Disabled", "0"), ("Sample/Hold", "S"), ("Continuous", "C")])
-    def test_that_WHEN_mode_is_set_THEN_rb_matches(self, mode, mode_set):
-        self.ca.assert_setting_setpoint_sets_readback(mode_set, readback_pv="MODE:RB", set_point_pv="MODE:SP",
-                                                      expected_value=mode)
+    @parameterized.expand(["Disabled", "Sample/Hold", "Continuous"])
+    def test_that_WHEN_mode_is_set_THEN_rb_matches(self, mode):
+        self.ca.assert_setting_setpoint_sets_readback(mode, readback_pv="MODE:RB", set_point_pv="MODE:SP")
 
     @parameterized.expand(["Channel 1", "Channel 2"])
     def test_that_WHEN_default_channel_is_set_THEN_rb_matches(self, channel):
@@ -110,8 +109,8 @@ class Lm500Tests(unittest.TestCase):
         self.ca.assert_setting_setpoint_sets_readback("Channel 2", readback_pv="TYPE:RB", set_point_pv="CHANNEL:SP",
                                                       expected_value=type_2)
 
-    @skip_if_recsim("Gets correct EGU setting from device, so will fail in recsim")
     @parameterized.expand(["CM", "IN", "%"])
+    @skip_if_recsim("Gets correct EGU setting from device, so will fail in recsim")
     def test_that_WHEN_units_set_THEN_readback_AND_egu_updates(self, units):
         self.ca.assert_setting_setpoint_sets_readback(units, readback_pv="UNITS:RB", set_point_pv="UNITS:SP")
         self.ca.assert_that_pv_is("HIGH:RB.EGU", units)
@@ -122,7 +121,6 @@ class Lm500Tests(unittest.TestCase):
         self.ca.assert_that_pv_is("LENGTH:RB.EGU", units)
         self.ca.assert_that_pv_is("ALARM:RB.EGU", units)
 
-    @skip_if_recsim("Uses emulator backdoor")
     @parameterized.expand([("_all_0", "00000000", "00000000", 0, [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0,  0]),
                            ("_all_1", "01111111", "01111111", 1, [1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1]),
                            ("_chan_1_all_1", "01111111", "00000000", 0, [1, 1, 1, 1, 1, 1, 1],
@@ -143,11 +141,13 @@ class Lm500Tests(unittest.TestCase):
                             [0, 0, 0, 0, 0, 0, 0]),
                            ("read_in_progress", "00000001", "00000000", 0, [0, 0, 0, 0, 0, 0, 1],
                             [0, 0, 0, 0, 0, 0, 0])])
+    @skip_if_recsim("Uses emulator backdoor")
     def test_that_WHEN_status_bits_set_THEN_correctly_seperated(self, _, int1, int2, int3, first_bits, second_bits):
+        modes = ["Operate Mode", "Menu Mode"]
         self._lewis.backdoor_set_on_device("status", f"{int(int1, 2)},{int(int2, 2)},{int3}")
         self.ca.assert_that_pv_is_number("STATUS:BIT:0", int(int1, 2))
         self.ca.assert_that_pv_is_number("STATUS:BIT:1", int(int2, 2))
-        self.ca.assert_that_pv_is_number("MENU:MODE", int3)
+        self.ca.assert_that_pv_is("MENU:MODE", modes[int3])
         pvs = ["BURNOUT", "SENSOR:STATUS", "ALARM:STATUS", "REFILL:INHIBITED", "REFILL:TIMEOUT", "REFILL", "READ"]
         pv = 0
         for bit in first_bits:
