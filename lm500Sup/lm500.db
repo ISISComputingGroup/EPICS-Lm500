@@ -3,6 +3,9 @@ record(ai, "$(P)ALARM:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getALARM() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:ALARM:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbi, "$(P)BOOST:RB") {
@@ -13,6 +16,9 @@ record(mbbi, "$(P)BOOST:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getBOOST() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:BOOST:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)BOOST:SP") {
@@ -22,6 +28,9 @@ record(mbbo, "$(P)BOOST:SP") {
     field(TWST, "Smart")
     field(DTYP, "stream")
     field(OUT,  "@lm500.proto setBOOST $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:BOOST:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbi, "$(P)OUTPUT:RB") {
@@ -35,6 +44,9 @@ record(mbbi, "$(P)OUTPUT:RB") {
     field(ONST, "Channel 1")
     field(TWST, "Channel 2")
     field(INP,  "@lm500.proto getOUT() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 record(mbbo, "$(P)OUTPUT:SP") {
     field(DESC, "Output Channel")
@@ -46,6 +58,9 @@ record(mbbo, "$(P)OUTPUT:SP") {
     field(ONST, "Channel 1")
     field(TWST, "Channel 2")
     field(OUT, "@lm500.proto setOUT $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPUT:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbi, "$(P)TYPE:RB") {
@@ -57,6 +72,9 @@ record(mbbi, "$(P)TYPE:RB") {
     field(ONST, "Nitrogen")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getTYPE() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:TYPE:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbi, "$(P)TYPE:CHAN1:RB") {
@@ -68,6 +86,9 @@ record(mbbi, "$(P)TYPE:CHAN1:RB") {
     field(ONST, "Nitrogen")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getTYPECHAN(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:TYPE:CHAN1:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbi, "$(P)TYPE:CHAN2:RB") {
@@ -79,6 +100,9 @@ record(mbbi, "$(P)TYPE:CHAN2:RB") {
     field(ONST, "Nitrogen")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getTYPECHAN(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:TYPE:CHAN2:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 record(mbbi, "$(P)CHANNEL:RB") {
     field(DESC, "Default Channel")
@@ -89,6 +113,9 @@ record(mbbi, "$(P)CHANNEL:RB") {
     field(ONST, "Channel 2")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getCHAN() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHANNEL:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)CHANNEL:SP") {
@@ -99,6 +126,9 @@ record(mbbo, "$(P)CHANNEL:SP") {
     field(ZRST, "Channel 1")
     field(ONST, "Channel 2")
     field(OUT, "@lm500.proto setCHAN $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHANNEL:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbi, "$(P)ERROR:RB") {
@@ -110,6 +140,9 @@ record(mbbi, "$(P)ERROR:RB") {
     field(ZRST, "Reporting Disabled")
     field(ONST, "Reporting Enabled")
     field(INP,  "@lm500.proto getERR() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:ERROR:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)ERROR:SP") {
@@ -120,6 +153,9 @@ record(mbbo, "$(P)ERROR:SP") {
     field(ZRST, "Disable")
     field(ONST, "Enable")
     field(OUT, "@lm500.proto setERR $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:ERROR:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bo, "$(P)FILL") {
@@ -129,6 +165,9 @@ record(bo, "$(P)FILL") {
     field(ONAM, "Starting Fill") 
     field(HIGH, "1")
     field(OUT,  "@lm500.proto FILL $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:FILL")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ai, "$(P)FILL:TIME") {
@@ -137,6 +176,9 @@ record(ai, "$(P)FILL:TIME") {
     field(EGU, "min")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getFILL($(P)FILL:STATUS) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:FILL:TIME")
+    field(SDIS, "$(P)DISABLE")
 }
 record(mbbi, "$(P)FILL:STATUS") {
     field(DESC, "default channel Fill status")
@@ -154,6 +196,9 @@ record(bo, "$(P)FILL:CHAN1") {
     field(ONAM, "Starting Fill") 
     field(HIGH, "1")
     field(OUT,  "@lm500.proto FILLCHAN(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:FILL:CHAN1")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ai, "$(P)FILL:CHAN1:TIME") {
@@ -162,6 +207,9 @@ record(ai, "$(P)FILL:CHAN1:TIME") {
     field(EGU, "min")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getFILLCHAN(1, $(P)FILL:CHAN1:STATUS) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:FILL:CHAN1:TIME")
+    field(SDIS, "$(P)DISABLE")
 }
 record(mbbi, "$(P)FILL:CHAN1:STATUS") {
     field(DESC, "channel 2 result Fill status")
@@ -179,6 +227,9 @@ record(bo, "$(P)FILL:CHAN2") {
     field(ONAM, "Starting Fill") 
     field(HIGH, "1")
     field(OUT,  "@lm500.proto FILLCHAN(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:FILL:CHAN2")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ai, "$(P)FILL:CHAN2:TIME") {
@@ -187,6 +238,9 @@ record(ai, "$(P)FILL:CHAN2:TIME") {
     field(EGU, "min")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getFILLCHAN(2, $(P)FILL:CHAN2:STATUS) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:FILL:CHAN2:TIME")
+    field(SDIS, "$(P)DISABLE")
 }
 record(mbbi, "$(P)FILL:CHAN2:STATUS") {
     field(DESC, "channel 1 result Fill Status")
@@ -202,12 +256,18 @@ record(ai, "$(P)HIGH:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getHIGH() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:HIGH:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ao, "$(P)HIGH:SP") {
     field(DESC, "Set High Threshold")
     field(DTYP, "stream")
     field(OUT, "@lm500.proto setHIGH $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:HIGH:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ai, "$(P)LOW:RB") {
@@ -215,12 +275,18 @@ record(ai, "$(P)LOW:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getLOW() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:LOW:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ao, "$(P)LOW:SP") {
     field(DESC, "Set Low Threshold")
     field(DTYP, "stream")
     field(OUT, "@lm500.proto setLow $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:LOW:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(stringin, "$(P)INTRVL:RB") {
@@ -228,15 +294,29 @@ record(stringin, "$(P)INTRVL:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getINERTVAL() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:INTRVL:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(scalcout, "$(P)INTRVL:SP") {
     field(DESC, "Interval Setpoint")
-    field(DTYP, "stream")
+    field(DTYP, "Soft Channel")
     field(CALC, "$P('%02i',a)+':'+$P('%02i',b)+':'+$P('%02i',c)")
     field(INPA, "$(P)INTRVL:HOUR:SP CP MS")
     field(INPB, "$(P)INTRVL:MIN:SP CP MS")
     field(INPC,  "$(P)INTRVL:SEC:SP CP MS")
+    field(OOPT, "Every Time")
+    field(DOPT, "Use CALC")
+    field(OUT, "$(P)INTRVL:SP:RAW CP MS")
+}
+
+record(stringout, "$(P)INTRVL:SP:RAW")
+{
+    field(DESC, "Interval Setpoint")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:INTRVL:SP:RAW")
+    field(SDIS, "$(P)DISABLE")
     field(OUT, "@lm500.proto setINTVL $(PORT)")
 }
 
@@ -268,6 +348,9 @@ record(bo, "$(P)MEAS") {
     field(ONAM, "Start Measurement") 
     field(HIGH, "1")
     field(OUT,  "@lm500.proto MEAS $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MEAS")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ai, "$(P)MEAS:RB") {
@@ -275,6 +358,9 @@ record(ai, "$(P)MEAS:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getMEASURE() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MEAS:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bo, "$(P)MEAS:CHAN1") {
@@ -284,6 +370,9 @@ record(bo, "$(P)MEAS:CHAN1") {
     field(ONAM, "Start Measurement") 
     field(HIGH, "1")
     field(OUT,  "@lm500.proto MEASCHAN(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MEAS:CHAN1")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ai, "$(P)MEAS:CHAN1:RB") {
@@ -291,6 +380,9 @@ record(ai, "$(P)MEAS:CHAN1:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getMEASURECHAN(1) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MEAS:CHAN1:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bo, "$(P)MEAS:CHAN2") {
@@ -300,6 +392,9 @@ record(bo, "$(P)MEAS:CHAN2") {
     field(ONAM, "Start Measurement") 
     field(HIGH, "1")
     field(OUT,  "@lm500.proto MEASCHAN(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MEAS:CHAN2")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ai, "$(P)MEAS:CHAN2:RB") {
@@ -307,6 +402,9 @@ record(ai, "$(P)MEAS:CHAN2:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getMEASURECHAN(2) $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MEAS:CHAN2:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbi, "$(P)MODE:RB") {
@@ -317,6 +415,9 @@ record(mbbi, "$(P)MODE:RB") {
     field(TWST, "Continuous")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getMODE() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MODE:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)MODE:SP:RAW") {
@@ -325,16 +426,23 @@ record(mbbo, "$(P)MODE:SP:RAW") {
     field(ZRST, "0")
     field(ONST, "S")
     field(TWST, "C")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MODE:SP:RAW")
+    field(SDIS, "$(P)DISABLE")
     field(OUT,  "@lm500.proto setMODE($(P)MODE:SP) $(PORT)")
+
 }
 
 record(mbbo, "$(P)MODE:SP") {
     field(DESC, "Mode Setpoint")
-    field(DTYP, "soft channel")
+    field(DTYP, "Soft Channel")
     field(ZRST, "Disabled")
     field(ONST, "Sample/Hold")
     field(TWST, "Continuous")
     field(OUT,  "$(P)MODE:SP:RAW PP")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MODE:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(ai, "$(P)LENGTH:RB") {
@@ -342,6 +450,9 @@ record(ai, "$(P)LENGTH:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getLENGTH() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:LENGTH:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbiDirect, "$(P)STATUS:BIT:0") {
@@ -376,6 +487,9 @@ record(bi, "$(P)CHAN1:READ") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Read in progress")
     field(INP,  "$(P)STATUS:BIT:0.B0 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN1:READ")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN2:READ") {
@@ -383,6 +497,9 @@ record(bi, "$(P)CHAN2:READ") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Read in progress")
     field(INP,  "$(P)STATUS:BIT:1.B0 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN2:READ")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN1:REFILL") {
@@ -390,6 +507,9 @@ record(bi, "$(P)CHAN1:REFILL") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Refill active")
     field(INP,  "$(P)STATUS:BIT:0.B1 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN1:REFILL")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN2:REFILL") {
@@ -397,6 +517,9 @@ record(bi, "$(P)CHAN2:REFILL") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Refill active")
     field(INP,  "$(P)STATUS:BIT:1.B1 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN2:REFILL")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN1:REFILL:TIMEOUT") {
@@ -404,6 +527,9 @@ record(bi, "$(P)CHAN1:REFILL:TIMEOUT") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Refill timeout occured")
     field(INP,  "$(P)STATUS:BIT:0.B2 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN1:REFILL:TIMEOUT")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN2:REFILL:TIMEOUT") {
@@ -411,6 +537,9 @@ record(bi, "$(P)CHAN2:REFILL:TIMEOUT") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Refill timeout occured")
     field(INP,  "$(P)STATUS:BIT:1.B2 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN2:REFILL:TIMEOUT")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN1:REFILL:INHIBITED") {
@@ -418,6 +547,9 @@ record(bi, "$(P)CHAN1:REFILL:INHIBITED") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Auto refil is inihibeted")
     field(INP,  "$(P)STATUS:BIT:0.B3 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN1:REFILL:INHIBITED")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN2:REFILL:INHIBITED") {
@@ -425,6 +557,9 @@ record(bi, "$(P)CHAN2:REFILL:INHIBITED") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Auto refil is inihibeted")
     field(INP,  "$(P)STATUS:BIT:1.B3 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN2:REFILL:INHIBITED")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN1:ALARM:STATUS") {
@@ -432,6 +567,9 @@ record(bi, "$(P)CHAN1:ALARM:STATUS") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Alarm Limit Exceeded")
     field(INP,  "$(P)STATUS:BIT:0.B4 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN1:ALARM:STATUS")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN2:ALARM:STATUS") {
@@ -439,6 +577,9 @@ record(bi, "$(P)CHAN2:ALARM:STATUS") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Alarm Limit Exceeded")
     field(INP,  "$(P)STATUS:BIT:1.B4 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN2:ALARM:STATUS")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN1:SENSOR:STATUS") {
@@ -446,6 +587,9 @@ record(bi, "$(P)CHAN1:SENSOR:STATUS") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Open Sensor")
     field(INP,  "$(P)STATUS:BIT:0.B5 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN1:SENSOR:STATUS")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN2:SENSOR:STATUS") {
@@ -453,6 +597,9 @@ record(bi, "$(P)CHAN2:SENSOR:STATUS") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Open Sensor")
     field(INP,  "$(P)STATUS:BIT:1.B5 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN2:SENSOR:STATUS")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN1:BURNOUT") {
@@ -460,6 +607,9 @@ record(bi, "$(P)CHAN1:BURNOUT") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Burnout detected")
     field(INP,  "$(P)STATUS:BIT:0.B6 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN1:BURNOUT")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)CHAN2:BURNOUT") {
@@ -467,6 +617,9 @@ record(bi, "$(P)CHAN2:BURNOUT") {
     field(DTYP, "Raw Soft Channel")
     field(ONAM, "Burnout detected")
     field(INP,  "$(P)STATUS:BIT:1.B6 CP MS")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:CHAN2:BURNOUT")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bi, "$(P)MENU:MODE") {
@@ -474,6 +627,9 @@ record(bi, "$(P)MENU:MODE") {
     field(DTYP, "stream")
     field(ONAM, "Menu Mode")
     field(ZNAM, "Operate Mode")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:MENU:MODE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbi, "$(P)UNITS:RB") {
@@ -484,6 +640,9 @@ record(mbbi, "$(P)UNITS:RB") {
     field(DTYP, "stream")
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getUNITS() $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:UNITS:RB")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbo, "$(P)UNITS:SP") {
@@ -493,6 +652,9 @@ record(mbbo, "$(P)UNITS:SP") {
     field(ONST, "IN")
     field(TWST, "%")
     field(OUT,  "@lm500.proto setUNITS $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:UNITS:SP")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(bo, "$(P)SIM")
@@ -514,3 +676,197 @@ record(bo, "$(P)DISABLE")
     field(ZNAM, "COMMS ENABLED")
     field(ONAM, "COMMS DISABLED")
 }
+
+### SIMULATION RECORDS ###
+
+record(ai,"$(P)SIM:ALARM:RB")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbo,"$(P)SIM:BOOST:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+alias("$(P)SIM:BOOST:SP","$(P)SIM:BOOST:RB")
+
+record(mbbo,"$(P)SIM:CHANNEL:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:CHANNEL:SP","$(P)SIM:CHANNEL:RB")
+
+record(mbbo,"$(P)SIM:ERROR:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:ERROR:SP","$(P)SIM:ERROR:RB")
+
+record(bo,"$(P)SIM:FILL")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bo,"$(P)SIM:FILL:CHAN1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai,"$(P)SIM:FILL:CHAN1:TIME")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bo,"$(P)SIM:FILL:CHAN2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai,"$(P)SIM:FILL:CHAN2:TIME")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai,"$(P)SIM:FILL:TIME")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao,"$(P)SIM:HIGH:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:HIGH:SP","$(P)SIM:HIGH:RB")
+
+record(stringin,"$(P)SIM:INTRVL:RB")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:INTRVL:RB","$(P)SIM:INTRVL:SP:RAW")
+
+record(ai,"$(P)SIM:LENGTH:RB")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao,"$(P)SIM:LOW:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:LOW:SP","$(P)SIM:LOW:RB")
+
+record(bo,"$(P)SIM:MEAS")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bo,"$(P)SIM:MEAS:CHAN1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai,"$(P)SIM:MEAS:CHAN1:RB")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bo,"$(P)SIM:MEAS:CHAN2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai,"$(P)SIM:MEAS:CHAN2:RB")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai,"$(P)SIM:MEAS:RB")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bi,"$(P)SIM:MENU:MODE")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbi,"$(P)SIM:MODE:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(INP, "$(P)MODE:RB CP MS")
+    field(OUT,  "$(P)SIM:MODE:SP:RAW PP")
+}
+
+alias("$(P)SIM:MODE:SP","$(P)SIM:MODE:RB")
+
+record(mbbo,"$(P)SIM:MODE:SP:RAW")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(ZRST, "0")
+    field(ONST, "S")
+    field(TWST, "C")
+}
+
+record(mbbo,"$(P)SIM:OUTPUT:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+alias("$(P)SIM:OUTPUT:SP","$(P)SIM:OUTPUT:RB")
+
+record(mbbi,"$(P)SIM:TYPE:CHAN1:RB")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbi,"$(P)SIM:TYPE:CHAN2:RB")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbi,"$(P)SIM:TYPE:RB")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbi,"$(P)SIM:UNITS:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(FLNK, "$(P)SIM:HIGH:SP.EGU PP")
+}
+
+alias("$(P)SIM:UNITS:SP","$(P)SIM:UNITS:RB")
+
