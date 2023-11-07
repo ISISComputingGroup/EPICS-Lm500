@@ -308,12 +308,13 @@ record(scalcout, "$(P)INTRVL:SP") {
     field(INPC,  "$(P)INTRVL:SEC:SP CP MS")
     field(OOPT, "Every Time")
     field(DOPT, "Use CALC")
-    field(OUT, "$(P)INTRVL:SP:RAW CP MS")
+    field(OUT, "$(P)INTRVL:SP:RAW PP")
 }
 
 record(stringout, "$(P)INTRVL:SP:RAW")
 {
     field(DESC, "Interval Setpoint")
+    field(DTYP, "stream")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:INTRVL:SP:RAW")
     field(SDIS, "$(P)DISABLE")
