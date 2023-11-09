@@ -170,23 +170,14 @@ record(bo, "$(P)FILL") {
     field(SDIS, "$(P)DISABLE")
 }
 
-record(ai, "$(P)FILL:TIME") {
-    field(DESC, "default channel Fill time")
+record(stringin, "$(P)FILL:RB") {
+    field(DESC, "default channel Fill time or status")
     field(DTYP, "stream")
-    field(EGU, "min")
     field(SCAN, "1 second")
-    field(INP,  "@lm500.proto getFILL($(P)FILL:STATUS) $(PORT)")
+    field(INP,  "@lm500.proto getFILL() $(PORT)")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:FILL:TIME")
+    field(SIOL, "$(P)SIM:FILL:RB")
     field(SDIS, "$(P)DISABLE")
-}
-record(mbbi, "$(P)FILL:STATUS") {
-    field(DESC, "default channel Fill status")
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(ZRST, "Off")
-    field(ONST, "Timeout")
-    field(DTYP, "Soft Channel")
 }
 
 record(bo, "$(P)FILL:CHAN1") {
@@ -201,23 +192,14 @@ record(bo, "$(P)FILL:CHAN1") {
     field(SDIS, "$(P)DISABLE")
 }
 
-record(ai, "$(P)FILL:CHAN1:TIME") {
-    field(DESC, "Channel 1 result Fill Time")
+record(stringin, "$(P)FILL:CHAN1:RB") {
+    field(DESC, "Channel 1 Fill time or status")
     field(DTYP, "stream")
-    field(EGU, "min")
     field(SCAN, "1 second")
-    field(INP,  "@lm500.proto getFILLCHAN(1, $(P)FILL:CHAN1:STATUS) $(PORT)")
+    field(INP,  "@lm500.proto getFILLCHAN(1) $(PORT)")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:FILL:CHAN1:TIME")
+    field(SIOL, "$(P)SIM:FILL:CHAN1:RB")
     field(SDIS, "$(P)DISABLE")
-}
-record(mbbi, "$(P)FILL:CHAN1:STATUS") {
-    field(DESC, "channel 2 result Fill status")
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(ZRST, "Off")
-    field(ONST, "Timeout")
-    field(DTYP, "Soft Channel")
 }
 
 record(bo, "$(P)FILL:CHAN2") {
@@ -232,23 +214,14 @@ record(bo, "$(P)FILL:CHAN2") {
     field(SDIS, "$(P)DISABLE")
 }
 
-record(ai, "$(P)FILL:CHAN2:TIME") {
-    field(DESC, "Channel 2 result Fill time")
+record(stringin, "$(P)FILL:CHAN2:RB") {
+    field(DESC, "Channel 2 Fill time or status")
     field(DTYP, "stream")
-    field(EGU, "min")
     field(SCAN, "1 second")
-    field(INP,  "@lm500.proto getFILLCHAN(2, $(P)FILL:CHAN2:STATUS) $(PORT)")
+    field(INP,  "@lm500.proto getFILLCHAN(2) $(PORT)")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:FILL:CHAN2:TIME")
+    field(SIOL, "$(P)SIM:FILL:CHAN2:stringout")
     field(SDIS, "$(P)DISABLE")
-}
-record(mbbi, "$(P)FILL:CHAN2:STATUS") {
-    field(DESC, "channel 1 result Fill Status")
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(ZRST, "Off")
-    field(ONST, "Timeout")
-    field(DTYP, "Soft Channel")
 }
 
 record(ai, "$(P)HIGH:RB") {

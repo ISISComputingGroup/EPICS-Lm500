@@ -44,14 +44,12 @@ getERR{
 
 getFILL{
     out "FILL?";
-    in "%d %(EGU)s";
-    @mismatch {in "%(\$1)s";}
+    in "%#s";
 }
 
 getFILLCHAN{
     out "FILL? \$1";
-    in "%d %(EGU)s";
-    @mismatch {in "%(\$2)s";}
+    in "%#s";
 }
 
 getHIGH{
