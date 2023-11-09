@@ -132,13 +132,13 @@ class Lm500StreamInterface(StreamInterface):
         self.device.fill(channel)
         
     def set_high(self, high):
-        self.device.high_threshold = high
+        self.device.high_threshold = int(high)
         
     def set_interval(self, hour, minute, second):
         self.device.sample_interval = f"{hour:02}:{minute:02}:{second:02}"
         
     def set_low(self, low):
-        self.device.low_threshold = low
+        self.device.low_threshold = int(low)
         
     def set_measurement(self, channel=None):
         if channel is None:
