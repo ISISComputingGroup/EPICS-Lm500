@@ -1,9 +1,10 @@
 from collections import OrderedDict
 from .states import FillingChan1State, FillingChan2State, FillingBothState
+from lewis.core.logging import has_log
 from lewis.core.statemachine import State
 from lewis.devices import StateMachineDevice
 
-
+@has_log
 class SimulatedLm500(StateMachineDevice):
 
     def _initialize_data(self):
@@ -25,9 +26,9 @@ class SimulatedLm500(StateMachineDevice):
         self.units = "CM"
         self.status = "0,0,0"
         self.filling = {1: False, 2: False}
-        self.fill_speed = 5.0
+        self.fill_speed = 1.0
         self.max_fill_time = 1
-        self.fill_status = {1: "Off", 2: "Off"}
+        self.fill_status_val = {1: "Off", 2: "Off"}
 
     def _get_state_handlers(self):
         return {
@@ -72,7 +73,7 @@ class SimulatedLm500(StateMachineDevice):
         if self.filling[channel]:
             return f"{self.fill_time[channel]} min"
         else:
-            return self.fill_status[channel]
+            return self.fill_status_val[channel]
 
     def get_alarm_threshold(self):
         return f"{self.alarm_threshold} {self.units}"

@@ -89,7 +89,11 @@ getLENGTH{
 
 getSTATUS{
     out "STAT?";
-    in "%d,%(\$1)d,%(\$2)i";
+    in "%d,%(\$1)d,%*d";
+}
+
+getSTATUSMODE{
+    in "%*d,%*d,%d"
 }
 
 getUNITS{
