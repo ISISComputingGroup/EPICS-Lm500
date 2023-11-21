@@ -14,7 +14,7 @@ class SimulatedLm500(StateMachineDevice):
         self.type = {1: 1, 2: 0}
         self.channel = 1
         self.error_response_mode = 0
-        self.high_threshold = 0
+        self.high_threshold = 10
         self.low_threshold = 0
         self.sample_interval = "00:00:00"
         self.sensor_length = 0
