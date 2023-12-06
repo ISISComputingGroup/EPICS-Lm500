@@ -166,7 +166,7 @@ record(mbbo, "$(P)ERROR:SP") {
 alias("$(P)CHANNEL", "$(P)CHANNEL:SP:RBV")
 
 record(bo, "$(P)FILL:START") {
-    field(DESC, "Start Fil")
+    field(DESC, "Start Fill")
     field(DTYP, "stream")
     field(VAL,  "0")
     field(ONAM, "Starting Fill") 
@@ -188,7 +188,7 @@ record(stringin, "$(P)FILL") {
 }
 
 record(bo, "$(P)FILL:START:CHAN1") {
-    field(DESC, "Start Fil")
+    field(DESC, "Start Fill")
     field(DTYP, "stream")
     field(VAL,  "0")
     field(ONAM, "Starting Fill") 
@@ -210,7 +210,7 @@ record(stringin, "$(P)FILL:CHAN1") {
 }
 
 record(bo, "$(P)FILL:START:CHAN2") {
-    field(DESC, "Start Fil")
+    field(DESC, "Start Fill")
     field(DTYP, "stream")
     field(VAL,  "0")
     field(ONAM, "Starting Fill") 
