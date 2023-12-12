@@ -1,0 +1,161 @@
+Terminator = '\r\n';
+ReplyTimeout = 2000;
+
+getIDN{
+    out "*IDN?";
+    in "%\$1[^\r\n]";
+    ExtraInput = Ignore;
+}
+
+getALARM {
+    out "ALARM?";
+    in "%f %(EGU)s";
+}
+
+getBOOST {
+    out "BOOST?";
+    in "%s";
+}
+
+getOUT {
+    out "OUT?";
+    in "%d";
+}
+
+getTYPE {
+    out "TYPE?";
+    in "%d";
+}
+
+getTYPECHAN {
+    out "TYPE? \$1";
+    in "%d";
+}
+
+getCHAN {
+    out "CHAN?";
+    in "%d";
+}
+
+getERR{
+    out "ERROR?";
+    in "%d";
+}
+
+getFILL{
+    out "FILL?";
+    in "%#s";
+}
+
+getFILLCHAN{
+    out "FILL? \$1";
+    in "%#s";
+}
+
+getHIGH{
+    out "HIGH?";
+    in "%f %(EGU)s";
+}
+
+getINERTVAL{
+    out "INTVL?";
+    in "%/[0-9]{2}:[0-9]{2}:[0-9]{2}/";
+}
+
+getLOW{
+    out "LOW?";
+    in "%f %(EGU)s";
+}
+
+getMEASURE{
+    out "MEAS?";
+    in  "%f %(EGU)s";
+}
+
+getMEASURECHAN{
+    out "MEAS? \$1";
+    in  "%f %(EGU)s";
+}
+
+getMODE{
+    out "MODE?";
+    in "%s";
+}
+
+getLENGTH{
+    out "LNGTH?";
+    in "%f %(EGU)s";
+}
+
+getSTATUS{
+    out "STAT?";
+    in "%d,%(\$1)d,%*d";
+}
+
+getSTATUSMODE{
+    in "%*d,%*d,%d"
+}
+
+getUNITS{
+    out "UNITS?";
+    in "%s";
+}
+
+setBOOST{
+    out "BOOST %s";
+    @init { out "BOOST?"; in "%s";}
+}
+
+setOUT{
+    out "OUT %d";
+    @init { out "OUT?"; in "%d";}
+}
+
+setCHAN{
+    out "CHAN %d";
+    @init { out "CHAN?"; in "%d";}
+}
+
+setERR{
+    out "ERROR %d";
+    @init { out "ERROR?"; in "%d";}
+}
+
+fillCHAN{
+    out "FILL \$1";
+}
+
+fill{
+    out "FILL";
+}
+
+setHIGH{
+    out "HIGH %f";
+    @init { out "HIGH?"; in "%f %(EGU)s";}
+}
+
+setLOW{
+    out "LOW %f";
+    @init { out "LOW?"; in "%f %(EGU)s";}
+}
+
+setINTVL{
+    out "INTVL %s";
+}
+
+MEAS{
+    out "MEAS";
+}
+MEASCHAN{
+    out "MEAS \$1";
+}
+
+setMODE{
+    out "MODE %s";
+    @init { out "MODE?"; in "%(\$1)s";}
+}
+
+setUNITS{
+    out "UNITS %s";
+    @init { out "UNITS?"; in "%s";}
+}
