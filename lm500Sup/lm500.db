@@ -163,8 +163,6 @@ record(mbbo, "$(P)ERROR:SP") {
     field(SDIS, "$(P)DISABLE")
 }
 
-alias("$(P)CHANNEL", "$(P)CHANNEL:SP:RBV")
-
 record(bo, "$(P)FILL:START") {
     field(DESC, "Start Fill")
     field(DTYP, "stream")
@@ -367,7 +365,7 @@ record(ai, "$(P)MEAS:CHAN1") {
     field(SCAN, "1 second")
     field(INP,  "@lm500.proto getMEASURECHAN(1) $(PORT)")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:MEAS:CHAN1:")
+    field(SIOL, "$(P)SIM:MEAS:CHAN1")
     field(SDIS, "$(P)DISABLE")
 }
 
@@ -426,8 +424,6 @@ record(mbbo, "$(P)MODE:SP") {
     field(ONST, "Sample/Hold")
     field(TWST, "Continuous")
     field(OUT,  "$(P)MODE:SP:RAW PP")
-    field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:MODE:SP")
     field(SDIS, "$(P)DISABLE")
 }
 
@@ -749,7 +745,7 @@ record(stringin,"$(P)SIM:INTRVL")
     field(DTYP, "Soft Channel")
 }
 
-alias("$(P)SIM:INTRVL","$(P)SIM:INTRVL:SP:RAW")
+alias("$(P)SIM:INTRVL","$(P)SIM:INTRVL:SP")
 
 record(ai,"$(P)SIM:LENGTH")
 {
@@ -765,31 +761,7 @@ record(ao,"$(P)SIM:LOW:SP")
 
 alias("$(P)SIM:LOW:SP","$(P)SIM:LOW")
 
-record(bo,"$(P)SIM:MEAS")
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
-
-record(bo,"$(P)SIM:MEAS:CHAN1")
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
-
-record(ai,"$(P)SIM:MEAS:CHAN1")
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
-
-record(bo,"$(P)SIM:MEAS:CHAN2")
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
-
-record(ai,"$(P)SIM:MEAS:CHAN2")
+record(bo,"$(P)SIM:MEAS:SP")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
@@ -801,21 +773,35 @@ record(ai,"$(P)SIM:MEAS")
     field(DTYP, "Soft Channel")
 }
 
+record(bo,"$(P)SIM:MEAS:CHAN1:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai,"$(P)SIM:MEAS:CHAN1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bo,"$(P)SIM:MEAS:CHAN2:SP")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai,"$(P)SIM:MEAS:CHAN2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
 record(bi,"$(P)SIM:MENU:MODE")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
-
-record(mbbi,"$(P)SIM:MODE:SP")
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-    field(INP, "$(P)MODE CP MS")
-    field(OUT,  "$(P)SIM:MODE:SP:RAW PP")
-}
-
-alias("$(P)SIM:MODE:SP","$(P)SIM:MODE")
 
 record(mbbo,"$(P)SIM:MODE:SP:RAW")
 {
@@ -825,6 +811,8 @@ record(mbbo,"$(P)SIM:MODE:SP:RAW")
     field(ONST, "S")
     field(TWST, "C")
 }
+alias("$(P)SIM:MODE:SP:RAW","$(P)SIM:MODE:SP")
+alias("$(P)SIM:MODE:SP:RAW","$(P)SIM:MODE")
 
 record(mbbo,"$(P)SIM:OUTPUT:SP")
 {
