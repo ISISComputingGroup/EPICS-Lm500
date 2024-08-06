@@ -1,6 +1,7 @@
-from lewis.core.statemachine import State
-from lewis.core import approaches
 from datetime import datetime
+
+from lewis.core import approaches
+from lewis.core.statemachine import State
 
 
 class resetState(State):

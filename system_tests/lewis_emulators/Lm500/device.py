@@ -1,8 +1,11 @@
 from collections import OrderedDict
-from .states import FillingChan1State, FillingChan2State, FillingBothState
+
 from lewis.core.logging import has_log
 from lewis.core.statemachine import State
 from lewis.devices import StateMachineDevice
+
+from .states import FillingBothState, FillingChan1State, FillingChan2State
+
 
 @has_log
 class SimulatedLm500(StateMachineDevice):
