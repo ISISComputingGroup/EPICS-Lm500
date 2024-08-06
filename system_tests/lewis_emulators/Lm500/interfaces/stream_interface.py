@@ -5,7 +5,6 @@ from lewis.utils.command_builder import CmdBuilder
 
 @has_log
 class Lm500StreamInterface(StreamInterface):
-    
     in_terminator = "\r\n"
     out_terminator = "\r\n"
 
@@ -32,7 +31,6 @@ class Lm500StreamInterface(StreamInterface):
             CmdBuilder("get_length").escape("LNGTH?").eos().build(),
             CmdBuilder("get_status").escape("STAT?").eos().build(),
             CmdBuilder("get_units").escape("UNITS?").eos().build(),
-
             CmdBuilder("set_boost").escape("BOOST ").string().eos().build(),
             CmdBuilder("set_output").escape("OUT ").int().eos().build(),
             CmdBuilder("set_channel").escape("CHAN ").int().eos().build(),
@@ -40,12 +38,20 @@ class Lm500StreamInterface(StreamInterface):
             CmdBuilder("set_fill").escape("FILL ").int().eos().build(),
             CmdBuilder("set_fill").escape("FILL").eos().build(),
             CmdBuilder("set_high").escape("HIGH ").float().eos().build(),
-            CmdBuilder("set_interval").escape("INTVL ").int().escape(":").int().escape(":").int().eos().build(),
+            CmdBuilder("set_interval")
+            .escape("INTVL ")
+            .int()
+            .escape(":")
+            .int()
+            .escape(":")
+            .int()
+            .eos()
+            .build(),
             CmdBuilder("set_low").escape("LOW ").float().eos().build(),
             CmdBuilder("set_measurement").escape("MEAS ").int().eos().build(),
             CmdBuilder("set_measurement").escape("MEAS").eos().build(),
             CmdBuilder("set_mode").escape("MODE ").char().eos().build(),
-            CmdBuilder("set_units").escape("UNITS ").string().eos().build()
+            CmdBuilder("set_units").escape("UNITS ").string().eos().build(),
         }
 
     def handle_error(self, request, error):
@@ -115,43 +121,42 @@ class Lm500StreamInterface(StreamInterface):
 
     def set_boost(self, boost):
         self.device.boost_mode = boost
-    
+
     def set_output(self, output):
         self.device.analog_out = output
-        
+
     def set_channel(self, channel=None):
         self.device.channel = channel
-        
+
     def set_error(self, set_error):
         self.device.error_response_mode = set_error
-    
+
     def set_fill(self, channel=None):
         if channel is None:
             channel = self.device.channel
         self.device.fill(channel)
-        
+
     def set_high(self, high):
         self.device.high_threshold = float(high)
-        
+
     def set_interval(self, hour, minute, second):
         self.device.sample_interval = f"{hour:02}:{minute:02}:{second:02}"
-        
+
     def set_low(self, low):
         self.device.low_threshold = float(low)
-        
+
     def set_measurement(self, channel=None):
         if channel is None:
             channel = self.device.channel
         self.device.set_measurement(channel)
-        
+
     def set_mode(self, mode):
         modes = {"0": "Disabled", "S": "Sample/Hold", "C": "Continuous"}
         self.device.sample_mode = modes[mode]
-        
+
     def set_units(self, units):
         if units in ["CM", "IN", "%"]:
             self.device.units = units
         else:
             if units == "PERCENT":
                 self.device.units = "%"
-
