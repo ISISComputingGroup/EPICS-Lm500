@@ -1,12 +1,14 @@
 from collections import OrderedDict
-from .states import FillingChan1State, FillingChan2State, FillingBothState
+
 from lewis.core.logging import has_log
 from lewis.core.statemachine import State
 from lewis.devices import StateMachineDevice
 
+from .states import FillingBothState, FillingChan1State, FillingChan2State
+
+
 @has_log
 class SimulatedLm500(StateMachineDevice):
-
     def _initialize_data(self):
         self.alarm_threshold = "10"
         self.boost_mode = "Off"
@@ -32,35 +34,71 @@ class SimulatedLm500(StateMachineDevice):
 
     def _get_state_handlers(self):
         return {
-            'idle': State(),
-            'chan1': FillingChan1State(),
-            'chan2': FillingChan2State(),
-            'both': FillingBothState()
+            "idle": State(),
+            "chan1": FillingChan1State(),
+            "chan2": FillingChan2State(),
+            "both": FillingBothState(),
         }
 
     def _get_initial_state(self):
-        return 'idle'
+        return "idle"
 
     def _get_transition_handlers(self):
-        return OrderedDict([
-            (('idle', 'chan1'),
-             lambda: self.filling[1] is True and self.value[1] < self.high_threshold ),
-            (('chan1', 'idle'), lambda: self.value[1] == self.high_threshold or self.fill_time[1] > self.max_fill_time),
-            (('idle', 'chan2'),
-             lambda: self.filling[2] is True and self.value[2] < self.high_threshold and self.fill_time[
-                 2] < self.max_fill_time),
-            (('chan2', 'idle'), lambda: self.value[2] == self.high_threshold or self.fill_time[2] > self.max_fill_time),
-            (('chan1', 'both'),
-             lambda: self.filling[2] is True and self.value[2] < self.high_threshold and self.fill_time[
-                 2] < self.max_fill_time),
-            (('chan2', 'both'),
-             lambda: self.filling[1] is True and self.value[1] < self.high_threshold and self.fill_time[
-                 1] < self.max_fill_time),
-            (('both', 'idle'), lambda: self.value[1] == self.high_threshold and self.value[2] == self.high_threshold or
-                (self.fill_time[1] > self.max_fill_time and self.fill_time[2] > self.max_fill_time)),
-            (('both', 'chan1'), lambda: self.value[2] == self.high_threshold or self.fill_time[2] > self.max_fill_time),
-            (('both', 'chan2'), lambda: self.value[1] == self.high_threshold or self.fill_time[1] > self.max_fill_time)
-        ])
+        return OrderedDict(
+            [
+                (
+                    ("idle", "chan1"),
+                    lambda: self.filling[1] is True and self.value[1] < self.high_threshold,
+                ),
+                (
+                    ("chan1", "idle"),
+                    lambda: self.value[1] == self.high_threshold
+                    or self.fill_time[1] > self.max_fill_time,
+                ),
+                (
+                    ("idle", "chan2"),
+                    lambda: self.filling[2] is True
+                    and self.value[2] < self.high_threshold
+                    and self.fill_time[2] < self.max_fill_time,
+                ),
+                (
+                    ("chan2", "idle"),
+                    lambda: self.value[2] == self.high_threshold
+                    or self.fill_time[2] > self.max_fill_time,
+                ),
+                (
+                    ("chan1", "both"),
+                    lambda: self.filling[2] is True
+                    and self.value[2] < self.high_threshold
+                    and self.fill_time[2] < self.max_fill_time,
+                ),
+                (
+                    ("chan2", "both"),
+                    lambda: self.filling[1] is True
+                    and self.value[1] < self.high_threshold
+                    and self.fill_time[1] < self.max_fill_time,
+                ),
+                (
+                    ("both", "idle"),
+                    lambda: self.value[1] == self.high_threshold
+                    and self.value[2] == self.high_threshold
+                    or (
+                        self.fill_time[1] > self.max_fill_time
+                        and self.fill_time[2] > self.max_fill_time
+                    ),
+                ),
+                (
+                    ("both", "chan1"),
+                    lambda: self.value[2] == self.high_threshold
+                    or self.fill_time[2] > self.max_fill_time,
+                ),
+                (
+                    ("both", "chan2"),
+                    lambda: self.value[1] == self.high_threshold
+                    or self.fill_time[1] > self.max_fill_time,
+                ),
+            ]
+        )
 
     @property
     def state(self):
